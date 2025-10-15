@@ -8,8 +8,14 @@ import os
 from datetime import datetime
 
 app = Flask(__name__)
-CORS(app)
-
+CORS(app, resources={
+    r"/api/*": {
+        "origins": [
+            "http://localhost:3000",
+            "https://rtsp-frontend.vercel.app"
+        ]
+    }
+})
 # MongoDB Configuration
 MONGO_URI = os.getenv('MONGO_URI', 'mongodb://localhost:27017/')
 client = MongoClient(MONGO_URI)
